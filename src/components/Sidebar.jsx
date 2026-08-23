@@ -2,7 +2,13 @@ import React, { useState } from "react";
 
 
 
-
+                // <input
+                //   type="radio"
+                //   name="category"
+                //   checked={selectedCategory === category}
+                //   onChange={() => handleCategoryChange(category)}
+                //   className="h-4 w-4 accent-black"
+                // />
 const Sidebar = ({ categories=[], onFilterChange }) => {
   console.log(categories)
   const [search, setSearch] = useState("");
@@ -105,7 +111,7 @@ const Sidebar = ({ categories=[], onFilterChange }) => {
           </button>
         </div>
 
-        {/* Search */}
+        {/* Search Products */}
         <div className="mb-7">
           <h3 className="mb-3 text-sm font-semibold text-gray-900">
             Search Products

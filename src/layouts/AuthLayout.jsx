@@ -12,6 +12,7 @@ const AuthLayout = () => {
             MyShop
           </Link>
 
+01§
           <p className="mt-2 text-sm text-gray-500">
             Welcome to MyShop
           </p>

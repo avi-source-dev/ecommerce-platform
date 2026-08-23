@@ -3,10 +3,9 @@ import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Products from "../pages/Products"
 
-
 const CategoryProductsPage = () => {
   const { categoryId } = useParams();
-//   console.log("id =", id);
+
   const [filters, setFilters] = useState({
     search: "",
     category: "all",
@@ -42,12 +41,19 @@ const CategoryProductsPage = () => {
       "Bags",
       "Accessories",
     ],
+
+    freasitems:[
+      "break",
+      "biskit",
+      "kaju kaltli"
+
+    ]
   };
 
   const currentCategories = categories[categoryId] || [];
 
-  const handleFilterChange = (filters) => {
-    console.log(filters);
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters)
   };
 
   return (
@@ -60,9 +66,8 @@ const CategoryProductsPage = () => {
       <main className="flex-1">
         <Products 
         categoryId={categoryId}
-               filters={filters}
+        filters={filters}
         />
-        
       </main>
     </div>
   );

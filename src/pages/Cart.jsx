@@ -1,6 +1,4 @@
-import {useNavigate} from "react-router-dom"
-
-
+import {Link} from "react-router-dom"
 const products = [
   // ---------------- GROCERY ----------------
   {
@@ -189,169 +187,99 @@ const products = [
   },
 ];
 
-const Products = ({ categoryId, filters }) => {
-  const navigate = useNavigate()
-  const filteredProducts = products.filter((product) => {
-
-    // 1. Main category
-    if (product.category !== categoryId) {
-      return false;
-    }
-    // 2. Sub category
-    if (
-      filters.category !== "all" &&
-      product.subCategory !== filters.category
-    ) {
-      return false;
-    }
-
-    // 3. Search
-    if (
-      filters.search &&
-      !product.name
-        .toLowerCase()
-        .includes(filters.search.toLowerCase())
-    ) {
-      return false;
-    }
-
-    // 4. Price
-    if (product.price > filters.maxPrice) {
-      return false;
-    }
-
-    // 5. Availability
-    if (
-      filters.availability === "in-stock" &&
-      !product.stock
-    ) {
-      return false;
-    }
-
-    // 6. Rating
-    if (
-      filters.rating !== "all" &&
-      product.rating < Number(filters.rating)
-    ) {
-      return false;
-    }
-
-    return true;
-  });
+function Cart({ itemCart }) {
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-100 p-6 md:p-10">
 
-      {/* Result count */}
-      <div className="mb-5">
-        <h1 className="text-2xl font-bold capitalize">
-          {categoryId}
+      {/* Heading */}
+      <div className="max-w-5xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+          My Cart
         </h1>
 
-        <p className="text-gray-500">
-          {filteredProducts.length} products found
+        <p className="text-gray-500 mt-2">
+          {itemCart.length} item(s) in your cart
         </p>
       </div>
 
-      {filteredProducts.length === 0 ? (
+      {/* Cart Items */}
+      <div className="max-w-5xl mx-auto space-y-4">
 
-        <div className="bg-white rounded-2xl p-10 text-center">
-          <h2 className="text-xl font-semibold">
-            No Products Found
-          </h2>
+        {itemCart.length === 0 ? (
+          <div className="bg-white rounded-2xl shadow-sm p-10 text-center">
+            <div className="text-7xl mb-4">🛒</div>
 
-          <p className="text-gray-500 mt-2">
-            Try changing your filters.
-          </p>
-        </div>
+            <h2 className="text-2xl font-semibold text-gray-800">
+              Your cart is empty
+            </h2>
 
-      ) : (
-
-        <div className="
-          grid
-          grid-cols-2
-          md:grid-cols-3
-          xl:grid-cols-4
-          gap-5
-        ">
-
-          {filteredProducts.map((product) => (
-
+            <p className="text-gray-500 mt-2">
+              Add some products to your cart.
+            </p>
+          </div>
+        ) : (
+          itemCart.map((item) => (
             <div
-              key={product.id}
-              className="
-                bg-white
-                rounded-2xl
-                border
-                overflow-hidden
-                hover:shadow-lg
-                transition
-              "
+              key={item.id}
+              className="bg-white rounded-2xl shadow-sm p-5 flex flex-col md:flex-row md:items-center justify-between gap-5 hover:shadow-md transition"
             >
 
-              <div className="
-                h-48
-                bg-gray-100
-                flex
-                items-center
-                justify-center
-                text-7xl
-              ">
-                {product.emoji}
-              </div>
+              {/* Product Info */}
+              <div className="flex items-center gap-5">
 
-              <div className="p-4">
-
-                <p className="text-xs text-gray-400 mb-1">
-                  {product.subCategory}
-                </p>
-
-                <h2 className="font-semibold text-gray-900">
-                  {product.name}
-                </h2>
-
-                <div className="mt-2 text-sm">
-                  ⭐ {product.rating}
-                </div>
-
-                <div className="mt-2">
-                  <span className="text-lg font-bold">
-                    ₹{product.price.toLocaleString()}
+                {/* Product Emoji */}
+                <Link to= "/products/${products.id}">
+               
+                <div className="w-24 h-24 bg-gray-100 rounded-xl flex items-center justify-center">
+                  <span className="text-5xl">
+                    {item.emoji}
                   </span>
                 </div>
+                 </Link>
 
-                <button
-                  className="
-                    mt-4
-                    w-full
-                    rounded-xl
-                    bg-black
-                    py-2.5
-                    text-sm
-                    font-semibold
-                    text-white
-                    hover:bg-gray-800
-                  "
-                  onClick={()=>navigate(`/products/${product.id}`)}
+                {/* Details */}
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    {item.name}
+                  </h2>
 
-                >
-                  Add to Cart
-                </button>
+                  <p className="text-green-600 font-semibold mt-1">
+                    ₹{item.price}
+                  </p>
 
+                  <p className="text-gray-500 text-sm mt-1">
+                    Quantity: {item.quantity}
+                  </p>
+
+                  {/*  size available*/}
+                  {item.size && (
+                    <p className="text-gray-500 text-sm mt-1">
+                      Size: {item.size}
+                    </p>
+                  )}
+                </div>
+
+              </div>
+
+              {/* Price */}
+              <div className="text-right">
+                <p className="text-sm text-gray-500">
+                  Total
+                </p>
+
+                <p className="text-2xl font-bold text-gray-900">
+                  ₹{item.price * item.quantity}
+                </p>
               </div>
 
             </div>
+          ))
+        )}
 
-          ))}
-
-        </div>
-
-      )}
-    
-
-  
+      </div>
     </div>
   );
-};
+}
 
-export default Products;
+export default Cart;

@@ -1,6 +1,5 @@
 import React from "react";
 import {useNavigate} from "react-router-dom"
-import {useParams} from "react-router-dom"
 
 const categories = [
   {
@@ -52,14 +51,18 @@ const categories = [
       { name: "Lighting", emoji: "💡" },
     ],
   },
+    {
+    name: "freasitems",
+    items: [
+      { name: "bread", emoji: "🛋️" },
+      { name: "biskit", emoji: "🧇" },
+    
+    ],
+  },
 ];
 
 const Category = () => {
   
-const { id } = useParams();
-
-console.log(id);
-
   const navigate = useNavigate()
   return (
     <div className="min-h-screen bg-#e5e7eb">
@@ -70,10 +73,10 @@ console.log(id);
           <h1 className="text-4xl font-bold text-gray-900">
             Shop by Category
           </h1>
-{/* 
+
           <p className="mt-3 text-gray-500">
             Explore our wide range of products
-          </p> */}
+          </p>
         </div>
 
         {/* Category Sections */}
