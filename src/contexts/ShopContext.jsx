@@ -7,6 +7,36 @@ export default ShopContext;
 export function ShopProvider({ children }) {
   const [cart, setCart] = useState([]);
 
+  // Increase Quantity in cart
+  function increaseQuantity(itemId) {
+    setCart((prevCart) =>
+      prevCart.map((cartItem) =>
+        cartItem.id === itemId
+          ? {
+            ...cartItem,
+            quantity: cartItem.quantity + 1,
+          }
+          : cartItem
+      )
+    );
+  }
+
+  // Decrease Quantity in cart
+  function decreaseQuantity(itemId) {
+    setCart((prevCart) =>
+      prevCart.map((cartItem) =>
+        cartItem.id === itemId
+          ? {
+            ...cartItem,
+            quantity: cartItem.quantity - 1,
+          }
+          : cartItem
+      )
+    );
+  }
+
+
+  // Add to card functionlity
   function addToCard(item) {
     setCart((prevCart) => {
       const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
@@ -16,9 +46,9 @@ export function ShopProvider({ children }) {
         return prevCart.map((cartItem) =>
           cartItem.id === item.id
             ? {
-                ...cartItem,
-                quantity: cartItem.quantity + 1,
-              }
+              ...cartItem,
+              quantity: cartItem.quantity + 1,
+            }
             : cartItem,
         );
       }
@@ -36,8 +66,9 @@ export function ShopProvider({ children }) {
     });
   }
 
+
   return (
-    <ShopContext.Provider value={{ addToCard, cart }}>
+    <ShopContext.Provider value={{ addToCard, cart, increaseQuantity, decreaseQuantity }}>
       {children}
     </ShopContext.Provider>
   );
