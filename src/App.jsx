@@ -16,42 +16,6 @@ import Cart from "./pages/Cart"
 
 const App = () => {
 
-          // Add  item in card logic 
-    const[cart,setCart] = useState([])
-
-   function addCarditem(item) {
-  setCart((prevCart) => {
-
-    const existingItem = prevCart.find(
-      (cartItem) => cartItem.id === item.id
-      //  ===item.id = 1
-    );
-
-         // Product already cart me hai
-    if (existingItem) {
-      return prevCart.map((cartItem) =>
-        cartItem.id === item.id
-          ? {
-              ...cartItem,
-              quantity: cartItem.quantity + 1,
-            }
-          : cartItem
-      );
-    }
-
-    // Product pehli baar add ho raha hai
-    return [
-      ...prevCart,
-      {
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        emoji: item.emoji,
-        quantity: 1,
-      },
-    ];
-  });
-}
   return (
     <Routes>
       {/* Main */}
@@ -60,8 +24,8 @@ const App = () => {
         <Route path="/category" element={<Category/>}/>
         <Route path="/category/:categoryId" element={<CategoryProductsPage/>}/>
         <Route path="/products" element={<Products/>} />
-        <Route path="/products/:id" element={<ProductDetails addCarditem={addCarditem} />}/>
-        <Route path="/cart" element={<Cart itemCart={cart}/>} />
+        <Route path="/products/:id" element={<ProductDetails/>}/>
+        <Route path="/cart" element={<Cart/>} />
       </Route>
 
       {/* Auth */}

@@ -1,4 +1,8 @@
 import {Link} from "react-router-dom"
+
+import ShopContext from "../contexts/ShopContext"
+import { useContext } from "react";
+
 const products = [
   // ---------------- GROCERY ----------------
   {
@@ -187,8 +191,9 @@ const products = [
   },
 ];
 
-function Cart({ itemCart }) {
-
+function Cart() {
+    const {cart} =useContext(ShopContext)
+    console.log(cart)
   return (
     <div className="min-h-screen bg-gray-100 p-6 md:p-10">
 
@@ -199,14 +204,14 @@ function Cart({ itemCart }) {
         </h1>
 
         <p className="text-gray-500 mt-2">
-          {itemCart.length} item(s) in your cart
+          {cart.length} item(s) in your cart
         </p>
       </div>
 
       {/* Cart Items */}
       <div className="max-w-5xl mx-auto space-y-4">
 
-        {itemCart.length === 0 ? (
+        {cart.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-sm p-10 text-center">
             <div className="text-7xl mb-4">🛒</div>
 
@@ -219,7 +224,7 @@ function Cart({ itemCart }) {
             </p>
           </div>
         ) : (
-          itemCart.map((item) => (
+          cart.map((item) => (
             <div
               key={item.id}
               className="bg-white rounded-2xl shadow-sm p-5 flex flex-col md:flex-row md:items-center justify-between gap-5 hover:shadow-md transition"
@@ -279,6 +284,7 @@ function Cart({ itemCart }) {
 
       </div>
     </div>
+  
   );
 }
 
