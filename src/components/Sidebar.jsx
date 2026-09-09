@@ -1,14 +1,4 @@
 import React, { useState } from "react";
-
-
-
-                // <input
-                //   type="radio"
-                //   name="category"
-                //   checked={selectedCategory === category}
-                //   onChange={() => handleCategoryChange(category)}
-                //   className="h-4 w-4 accent-black"
-                // />
 const Sidebar = ({ categories=[], onFilterChange }) => {
   console.log(categories)
   const [search, setSearch] = useState("");

@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Products from "../pages/Products"
 
+
 const CategoryProductsPage = () => {
+ 
   const { categoryId } = useParams();
 
   const [filters, setFilters] = useState({

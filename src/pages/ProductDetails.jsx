@@ -1,6 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+import ShopContext from "../contexts/ShopContext"
+import { useContext } from "react";
+
 const product = [
   // ---------------- GROCERY ----------------
   {
@@ -193,7 +196,8 @@ const product = [
   },
 ];
 
-function ProductDetails({addCarditem}) {
+function ProductDetails() {
+   const{addToCard} =useContext(ShopContext)
  const navigate = useNavigate(); 
   const { id } = useParams();
 
@@ -298,7 +302,7 @@ function ProductDetails({addCarditem}) {
            <div className="mr-5">
             {selectedProduct.stock && (
             <button className="w-full md:w-fit px-8 py-3 bg-green-600 hover:bg-green-700 active:scale-95 text-white font-semibold rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
-            onClick={()=>addCarditem(selectedProduct)}
+            onClick={()=>addToCard(selectedProduct)}
             >
               🛒 Add to Cart
             </button>

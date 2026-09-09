@@ -15,19 +15,9 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart"
 
 const App = () => {
-    const[cart,setCart] = useState([])
-  
 
-  // {
-  //   id: 1,
-  //   name: "Fresh Red Apple",
-  //   category: "grocery",
-  //   subCategory: "Fruits",
-  //   price: 120,
-  //   rating: 4.5,
-  //   emoji: "🍎",
-  //   stock: true,
-  // }
+          // Add  item in card logic 
+    const[cart,setCart] = useState([])
 
    function addCarditem(item) {
   setCart((prevCart) => {
