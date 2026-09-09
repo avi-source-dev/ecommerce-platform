@@ -6,7 +6,7 @@ export default ShopContext;
 
 export function ShopProvider({ children }) {
   const [cart, setCart] = useState([]);
-
+   
   // Increase Quantity in cart
   function increaseQuantity(itemId) {
     setCart((prevCart) =>
@@ -38,6 +38,7 @@ export function ShopProvider({ children }) {
 
   // Add to card functionlity
   function addToCard(item) {
+
     setCart((prevCart) => {
       const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
 
