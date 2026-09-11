@@ -1,5 +1,10 @@
 import { createContext } from "react";
 import { useState } from "react";
+//import {products} from "../assets/products.js"
+import products from "../assets/products";
+
+ import categories from "../assets/categories"
+import subCategories from "../assets/categories"
 
 const ShopContext = createContext();
 export default ShopContext;
@@ -37,7 +42,7 @@ export function ShopProvider({ children }) {
 
 
   // Add to card functionlity
-  function addToCard(item) {
+  function addToCart(item) {
 
     setCart((prevCart) => {
       const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
@@ -69,7 +74,7 @@ export function ShopProvider({ children }) {
 
 
   return (
-    <ShopContext.Provider value={{ addToCard, cart, increaseQuantity, decreaseQuantity }}>
+    <ShopContext.Provider value={{ addToCart, cart, increaseQuantity, decreaseQuantity,products,categories,subCategories}}>
       {children}
     </ShopContext.Provider>
   );

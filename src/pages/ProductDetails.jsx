@@ -1,207 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 import ShopContext from "../contexts/ShopContext";
 import { useContext } from "react";
 
-const product = [
-  // ---------------- GROCERY ----------------
-  {
-    id: 1,
-    name: "Fresh Red Apple",
-    category: "grocery",
-    subCategory: "Fruits",
-    price: 120,
-    rating: 4.5,
-    emoji: "🍎",
-    stock: true,
-  },
-  {
-    id: 2,
-    name: "Fresh Banana",
-    category: "grocery",
-    subCategory: "Fruits",
-    price: 60,
-    rating: 4.3,
-    emoji: "🍌",
-    stock: true,
-  },
-  {
-    id: 3,
-    name: "Fresh Broccoli",
-    category: "grocery",
-    subCategory: "Vegetables",
-    price: 90,
-    rating: 4.4,
-    emoji: "🥦",
-    stock: true,
-  },
-  {
-    id: 4,
-    name: "Fresh Carrot",
-    category: "grocery",
-    subCategory: "Vegetables",
-    price: 70,
-    rating: 4.2,
-    emoji: "🥕",
-    stock: true,
-  },
-  {
-    id: 5,
-    name: "Potato Chips",
-    category: "grocery",
-    subCategory: "Snacks",
-    price: 40,
-    rating: 4.1,
-    emoji: "🍿",
-    stock: true,
-  },
-  {
-    id: 6,
-    name: "Orange Juice",
-    category: "grocery",
-    subCategory: "Beverages",
-    price: 110,
-    rating: 4.6,
-    emoji: "🧃",
-    stock: false,
-  },
-
-  // ---------------- FASHION ----------------
-  {
-    id: 7,
-    name: "Classic T-Shirt",
-    category: "fashion",
-    subCategory: "Men",
-    price: 599,
-    rating: 4.3,
-    size: ["S", "M", "L", "XL", "XXL"],
-    emoji: "👕",
-    stock: true,
-  },
-  {
-    id: 8,
-    name: "Blue Jeans",
-    category: "fashion",
-    subCategory: "Men",
-    price: 1299,
-    rating: 4.5,
-    size: ["S", "M", "L", "XL", "XXL"],
-    emoji: "👖",
-    stock: true,
-  },
-  {
-    id: 9,
-    name: "Women's Dress",
-    category: "fashion",
-    subCategory: "Women",
-    price: 1499,
-    size: ["S", "M", "L", "XL", "XXL"],
-    rating: 4.6,
-    emoji: "👗",
-    stock: true,
-  },
-  {
-    id: 10,
-    name: "Running Shoes",
-    category: "fashion",
-    subCategory: "Shoes",
-    price: 1999,
-    rating: 4.4,
-    size: ["S", "M", "L", "XL", "XXL"],
-    emoji: "👟",
-    stock: true,
-  },
-  {
-    id: 11,
-    name: "Leather Handbag",
-    category: "fashion",
-    subCategory: "Bags",
-    price: 1799,
-    rating: 4.2,
-    emoji: "👜",
-    stock: false,
-  },
-  {
-    id: 12,
-    name: "Sunglasses",
-    category: "fashion",
-    subCategory: "Accessories",
-    price: 799,
-    rating: 4.1,
-    emoji: "🕶️",
-    stock: true,
-  },
-
-  // ---------------- ELECTRONICS ----------------
-  {
-    id: 13,
-    name: "iPhone 15",
-    category: "electronics",
-    subCategory: "Mobiles",
-    price: 59999,
-    rating: 4.7,
-    emoji: "📱",
-    stock: true,
-  },
-  {
-    id: 14,
-    name: "Samsung Galaxy",
-    category: "electronics",
-    subCategory: "Mobiles",
-    price: 39999,
-    rating: 4.5,
-    emoji: "📱",
-    stock: true,
-  },
-  {
-    id: 15,
-    name: "HP Laptop",
-    category: "electronics",
-    subCategory: "Laptops",
-    price: 54999,
-    rating: 4.4,
-    emoji: "💻",
-    stock: true,
-  },
-  {
-    id: 16,
-    name: "iPad",
-    category: "electronics",
-    subCategory: "Tablets",
-    price: 42999,
-    rating: 4.6,
-    emoji: "📲",
-    stock: true,
-  },
-  {
-    id: 17,
-    name: "Sony Headphones",
-    category: "electronics",
-    subCategory: "Headphones",
-    price: 7999,
-    rating: 4.5,
-    emoji: "🎧",
-    stock: true,
-  },
-  {
-    id: 18,
-    name: "Smart Watch",
-    category: "electronics",
-    subCategory: "Smart Watches",
-    price: 2999,
-    rating: 4.2,
-    emoji: "⌚",
-    stock: true,
-  },
-];
 
 function ProductDetails() {
-  const { addToCard } = useContext(ShopContext);
+  const { addToCart,products } = useContext(ShopContext);
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const selectedProduct = product.find((item) => item.id === Number(id));
+  const selectedProduct = products.find((item) => item.id === Number(id));
 
   if (!selectedProduct) {
     return (
@@ -286,7 +94,7 @@ function ProductDetails() {
               {selectedProduct.stock && (
                 <button
                   className="w-full md:w-fit px-8 py-3 bg-green-600 hover:bg-green-700 active:scale-95 text-white font-semibold rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
-                  onClick={() => addToCard(selectedProduct)}
+                  onClick={() => addToCart(selectedProduct)}
                 >
                   🛒 Add to Cart
                 </button>

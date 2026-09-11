@@ -5,9 +5,7 @@ import Products from "../pages/Products"
 
 
 const CategoryProductsPage = () => {
- 
   const { categoryId } = useParams();
-
   const [filters, setFilters] = useState({
     search: "",
     category: "all",
